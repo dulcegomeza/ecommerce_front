@@ -1,0 +1,58 @@
+.fondo{
+    background-color: #535151;
+}
+
+.footer-fondo{
+    background-color: #303132;
+}
+
+.hero-header {
+    background: url(../assets/clothes.jpg) top center no-repeat;
+    background-size: cover;
+}
+
+
+.text-black{
+    color: #303132;
+}
+
+.btn-black{
+    background-color: #303132;
+    color: white;
+}
+
+.btn-black:hover{
+    background-color: white;
+    color: #303132;
+}
+
+.btn-blanck-form{
+    background-color: #303132;
+    color: white;
+}
+
+.btn-blanck-form:hover{
+    background-color: #777777 ;
+    color: white;
+}
+
+
+.form-signin {
+    max-width: 530px;
+    padding: 15px;
+}
+
+.btn{
+    border-radius: 0px;
+}
+
+
+.nav-link.active{
+    background-color: #777777 ;
+}
+
+.nav-item{
+    text-decoration: none;
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+}
