@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import Swal from 'sweetalert2'
 import { signupService } from '../services/userService';
-import { useNavigate }  from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import LoadingButton from '../components/LoadingButton';
+
 
 function Account() {
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formulario, setFormulario] = useState({
     name: '',
@@ -23,6 +26,7 @@ const navigate = useNavigate();
   }
 
   async function createUser(event) {
+    setIsLoading(true);
     event.preventDefault();
 
     try {
@@ -30,39 +34,15 @@ const navigate = useNavigate();
       console.log(user);
       //antes se usaba el history.push('/ruta') antes de la version 6 de react-router-dom
       navigate("/login");
-    } catch(err) {
+    } catch (err) {
       console.log(err.response.data);
       Swal.fire(
         'Mensaje',
         err.response.data.errors[0].msg,
         'error'
       )
+      setIsLoading(false);
     }
-
-    /*
-    const url = `${process.env.REACT_APP_API_URL}/users`;
-    await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formulario)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-
-        if (data.errors) {
-          console.log(data.errors);
-          Swal.fire(
-            'Mensaje',
-            data.errors[0].msg,
-            'error'
-          )
-        }
-      })
-      .catch(err => console.log(err))
-*/
 
   }
 
@@ -87,7 +67,7 @@ const navigate = useNavigate();
           <input type="password" className="form-control" id="floatingPassword" name="password" placeholder="Password" value={formulario.password} onChange={handleInputChange} />
           <label htmlFor="floatingPassword">Password</label>
         </div>
-        <button className="w-100 btn btn-lg btn-blanck-form" type="submit">Unirse</button>
+        <LoadingButton isLoading={isLoading} text="Unirse" />
       </form>
     </main>
 
