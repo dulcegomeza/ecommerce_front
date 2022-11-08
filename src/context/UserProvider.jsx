@@ -3,15 +3,16 @@ import { types } from '../types/types';
 import { authReducer } from "./authReducer"
 import { UserContext } from "./UserContext"
 
-const MY_AUTH_APP ='MY_AUTH_APP';
+
 
 
 const init = () =>{
- const user = JSON.parse(window.localStorage.getItem(MY_AUTH_APP));
+ const user = JSON.parse(window.localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE));
 
+ console.log(user);
  return {
   logged: !!user,
-  user:user
+  user
  }
 }
 
@@ -25,9 +26,8 @@ export const UserProvider = ({ children }) => {
     
     const userPayload =   {
       name: user.user.name,
-      lastName: user.user.lastName,
-      email: user.user.email,
-      uid: user.user.uid
+      uid: user.user.uid,
+      token: user.token
     };
 
     const action = {
@@ -35,14 +35,14 @@ export const UserProvider = ({ children }) => {
       payload: userPayload
     }
 
-    window.localStorage.setItem(MY_AUTH_APP, JSON.stringify( userPayload));
+    window.localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE, JSON.stringify( userPayload));
     dispatch(action);
   
  
   }
 
   const logout = () =>{
-     window.localStorage.removeItem(MY_AUTH_APP);
+     window.localStorage.removeItem(process.env.REACT_APP_LOCALSTORAGE);
      const action = {  type: types.logout };
      dispatch(action);
     //window.localStorage.clear()
@@ -50,7 +50,7 @@ export const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{user, login, logout}}>
+    <UserContext.Provider value={{...user, login, logout}}>
         { children }
     </UserContext.Provider>
   )

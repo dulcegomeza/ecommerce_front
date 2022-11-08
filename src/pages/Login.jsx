@@ -3,9 +3,11 @@ import Swal from 'sweetalert2'
 import { loginService } from '../services/userService';
 import { UserContext } from "../context/UserContext";
 import LoadingButton from '../components/LoadingButton';
-
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
+
   const { login } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -29,9 +31,8 @@ function Login() {
 
     try {
       const user = await loginService(formulario);
-      console.log(user);
       login(user);
-      setIsLoading(false);
+      navigate("/products");
     } catch (err) {
       Swal.fire(
         'Mensaje',

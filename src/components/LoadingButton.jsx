@@ -1,8 +1,6 @@
 import { Button, Spinner } from 'react-bootstrap'
 
-function LoadingButton({ isLoading, text }) {
-
-
+export default function LoadingButton({ isLoading, text }) {
 
     return (
         <>
@@ -14,4 +12,3 @@ function LoadingButton({ isLoading, text }) {
     )
 }
 
-export default LoadingButton

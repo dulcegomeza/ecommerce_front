@@ -6,6 +6,8 @@ import Account from '../pages/Account';
 import NotFound from '../pages/NotFound';
 import { UserProvider } from '../context/UserProvider';
 import Navbar from '../shared/Navbar';
+import Profile from '../pages/Profile';
+import { PrivateRoute } from './PrivateRoute';
 
 function AppRouter() {
     return (
@@ -16,6 +18,12 @@ function AppRouter() {
                 <Route path="/products" element={<Products />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/account" element={<Account />} />
+
+                <Route path="/profile" element={
+                    <PrivateRoute>
+                        <Profile />
+                    </PrivateRoute>
+                } />
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
