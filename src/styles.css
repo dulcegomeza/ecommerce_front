@@ -62,3 +62,17 @@
     display: block;
     padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
 }
+
+
+.font-text{
+    letter-spacing: 0.3em !important;
+    font-family: 'times new roman','sans-serif' !important;
+    font-weight: 900 !important;
+}
+
+.font-subtext{
+    font-weight: normal !important;
+    font-size: 19px !important;
+    font-family: 'raleway', 'sans-serif' !important;
+    letter-spacing: 0.3em !important;
+}

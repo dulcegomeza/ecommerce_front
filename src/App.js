@@ -5,7 +5,7 @@ import Footer from './shared/Footer';
 
 function App() {
 
-  console.log('hola');
+ 
   return (
     <BrowserRouter>
       <>

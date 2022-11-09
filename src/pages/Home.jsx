@@ -1,12 +1,7 @@
-import { useContext } from "react";
-import { UserContext } from "../context/UserContext";
-import Card from "./Card"
-
+import { NavLink } from 'react-router-dom';
 
 function Home() {
 
-    const { token } =useContext(UserContext);
-    console.log(token);
   return (
     <>
       <div className="container-fluid bg-primary py-5 mb-5 hero-header">
@@ -18,12 +13,26 @@ function Home() {
                      text-white mb-2">OTOÑO &</h1>
               <h1 className="display-1 text-uppercase 
                      text-white">INVIERNO</h1>
-              <button className="btn btn-black">Comprar</button>
+
+              <NavLink to="/products" className="btn btn-black">Comprar</NavLink>
             </div>
           </div>
         </div>
       </div>
-      <Card></Card>
+      <div >
+        <h1 className="text-center" >
+          <span className="font-text">
+            TODO EL AÑO
+          </span>
+        </h1>
+      </div>
+      <div>
+        <h5 className="text-center" >
+          <span className="font-subtext">Los infaltables</span>
+        </h5>
+      </div>
+
+
     </>
   )
 }
