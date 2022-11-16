@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import Swal from 'sweetalert2'
-import { putUserService, getUserService } from '../services/userService';
-import LoadingButton from '../components/LoadingButton';
-import { UserContext } from '../context/UserContext';
+import { putUserService, getUserService } from '../../services/userService';
+import LoadingButton from '../../components/LoadingButton';
+import { UserContext } from '../../context/UserContext';
 
 
 function Profile() {

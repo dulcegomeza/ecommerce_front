@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import Swal from 'sweetalert2'
-import { loginService } from '../services/userService';
-import { UserContext } from "../context/UserContext";
-import LoadingButton from '../components/LoadingButton';
+import { loginService } from '../../services/userService';
+import { UserContext } from "../../context/UserContext";
+import LoadingButton from '../../components/LoadingButton';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {

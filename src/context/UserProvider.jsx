@@ -1,57 +1,88 @@
-import { useReducer } from 'react';
-import { types } from '../types/types';
-import { authReducer } from "./authReducer"
+import { useState, useCallback } from 'react';
 import { UserContext } from "./UserContext"
+import { verifyingTokenService } from "../services/userService";
 
+/*const init = () => {
+  const token = window.localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE);
 
+  const user = {
+    uid: null,
+    name: null
+  }
 
+  return {
+    token,
+    logged: !!token,
+     user
+  }
+}*/
 
-const init = () =>{
- const user = JSON.parse(window.localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE));
+const intialState = {
+  uid: null,
+  name: null
+};
 
- console.log(user);
- return {
-  logged: !!user,
-  user
- }
-}
 
 export const UserProvider = ({ children }) => {
 
-  const [user, dispatch] = useReducer(authReducer, {}, init);
+  //const [user, dispatch] = useReducer(authReducer, {}, init);
 
-  //const [user, setUser] = useState(window.localStorage.getItem(MY_AUTH_APP) ?? false);
+  const [user, setUser] = useState(intialState);
 
-  const login = (user) =>{
-    
-    const userPayload =   {
-      name: user.user.name,
-      uid: user.user.uid,
-      token: user.token
-    };
+  const login = (data) => {
 
-    const action = {
-      type: types.login, 
+    setUser({
+      name: data.user.name,
+      uid: data.user.uid
+    });
+
+    /*const action = {
+      type: types.login,
       payload: userPayload
-    }
+    }*/
 
-    window.localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE, JSON.stringify( userPayload));
-    dispatch(action);
-  
- 
+    window.localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE, data.token);
+   // dispatch(action);
+
+
   }
 
-  const logout = () =>{
-     window.localStorage.removeItem(process.env.REACT_APP_LOCALSTORAGE);
-     const action = {  type: types.logout };
-     dispatch(action);
+  const logout = () => {
+    window.localStorage.removeItem(process.env.REACT_APP_LOCALSTORAGE);
+   // const action = { type: types.logout };
+   // dispatch(action);
     //window.localStorage.clear()
-   // setUser(null);
+     setUser({ id: null,
+      name: null});
   }
+
+
+  const verifyingToken = useCallback(
+    async () => {
+
+      const token = window.localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE);
+
+      if (token) {
+        const data = await verifyingTokenService();
+        window.localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE, token);
+
+
+        setUser({
+          name: data.user.name,
+          uid: data.user.uid
+        });
+
+      } else {
+        logout();
+      }
+    },
+    []
+  )
+
 
   return (
-    <UserContext.Provider value={{...user, login, logout}}>
-        { children }
+    <UserContext.Provider value={{ user, login, verifyingToken, logout }}>
+      {children}
     </UserContext.Provider>
   )
 }

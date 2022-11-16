@@ -1,22 +1,28 @@
 
-import { BrowserRouter } from 'react-router-dom';
+
 import AppRouter from './router/AppRouter';
-import Footer from './shared/Footer';
+import { UserProvider } from './context/UserProvider';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import ProductProvider from './context/ProductProvider';
+
+
+
 
 function App() {
 
- 
+
   return (
-    <BrowserRouter>
-      <>
-
+    <>
+      <UserProvider>
+      <PayPalScriptProvider options={{ "client-id": "AemE31m31cXaJSLZOKUI66oMaUAIOxNsrOodbaihysPrkRKNryRDvvvaMD2zMFp71ed7tZE-UYO_srHG" }}>
+       <ProductProvider>
         <AppRouter />
-
-        <Footer />
-      </>
-
-    </BrowserRouter>
-
+      
+        </ProductProvider>
+  
+        </PayPalScriptProvider>
+      </UserProvider>
+    </>
   );
 }
 
