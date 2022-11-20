@@ -28,7 +28,7 @@ import { types } from '../types/types';
         case types.DELETE_PRODUCT:
             return {
                 ...state,
-                cart: state.cart.filter( (product)=> product.id !== action.payload)
+                cart: state.cart.filter( (product)=> product.uid !== action.payload)
             //.filter crea un nuevo array
             }
         case types.EMPTY_CAR:

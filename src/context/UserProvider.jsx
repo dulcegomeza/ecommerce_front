@@ -2,26 +2,11 @@ import { useState, useCallback } from 'react';
 import { UserContext } from "./UserContext"
 import { verifyingTokenService } from "../services/userService";
 
-/*const init = () => {
-  const token = window.localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE);
-
-  const user = {
-    uid: null,
-    name: null
-  }
-
-  return {
-    token,
-    logged: !!token,
-     user
-  }
-}*/
 
 const intialState = {
   uid: null,
   name: null
 };
-
 
 export const UserProvider = ({ children }) => {
 

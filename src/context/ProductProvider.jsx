@@ -17,6 +17,8 @@ const initialState = {
 function ProductProvider({ children }) {
   const [globalState, dispatch] = useReducer(ProductReducer, initialState);
 
+  
+
   const getProducts = useCallback(
     async () => {
       try {
@@ -32,7 +34,7 @@ function ProductProvider({ children }) {
             imgsUrl: obj.imgsUrl,
             price: obj.price,
             discount: obj.discount,
-            discount_percentage: obj.discount_percentage,
+            discount_percentaje: obj.discount_percentaje,
           };
         });
 
@@ -55,14 +57,17 @@ function ProductProvider({ children }) {
 
   const getProduct = useCallback(async (uid) => {
     const res = await getProductByIdService(uid);
+
+    console.log(res);
     const product = {
-      uid: res.data.uid,
-      name: res.data.name,
-      description: res.data.description,
-      imgsUrl: res.data.imgsUrl,
-      price: res.data.price,
-      discount: res.data.discount,
-      discount_percentage: res.data.discount_percentage,
+      uid: res._id,
+      name: res.name,
+      category: res.category.name,
+      description: res.description,
+      imgsUrl: res.imgsUrl,
+      price: res.price,
+      discount: res.discount,
+      discount_percentaje: res.discount_percentaje,
     };
 
     dispatch(
@@ -75,6 +80,8 @@ function ProductProvider({ children }) {
 
 
   const addProduct = async (uid) => {
+
+
     const res = await getProductByIdService(uid);
     
     const product = {
@@ -84,23 +91,22 @@ function ProductProvider({ children }) {
       imgsUrl: res.imgsUrl,
       price: res.price,
       discount: res.discount,
-      discount_percentage: res.discount_percentage,
+      discount_percentage: res.discount_percentage
     };
 
     const findProduct = globalState.cart.find((product) => {
-      return product.uid === product.uid
+      return product.uid === uid
     })
-
     console.log(findProduct);
 
     if (!findProduct) {
-      console.log('entra');
-
       dispatch({
         type: types.ADD_PRODUCT,
         payload: product,
       });
-
+      console.log('producto añadido');
+    }else{
+      console.log('producto ya se encuentra añadido en el carrito');
     }
   };
 
@@ -111,7 +117,7 @@ function ProductProvider({ children }) {
     })
   }
 
-  const emptyCar = (cart) =>{
+  const emptyCart = (cart) =>{
     dispatch({
       type: types.EMPTY_CAR,
       payload: cart,
@@ -130,7 +136,7 @@ function ProductProvider({ children }) {
         addProduct,
         cart: globalState.cart,
         deleteProduct,
-        emptyCar
+        emptyCart
       }}
     >
       {children}

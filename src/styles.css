@@ -17,23 +17,27 @@
 }
 
 .btn-black{
-    background-color: #303132;
+    background-color: #ab7e82;
     color: white;
+    border: none;
 }
 
 .btn-black:hover{
     background-color: white;
     color: #303132;
+    border: none;
 }
 
 .btn-blanck-form{
     background-color: #303132;
     color: white;
+    border: none;
 }
 
 .btn-blanck-form:hover{
-    background-color: #777777 ;
+    background-color: #ab7e82;
     color: white;
+    border: none;
 }
 
 
@@ -71,6 +75,10 @@
     color: #ab7e82;
 }
 
+.text-pink{
+    color: #ab7e82;
+}
+
 .font-subtext{
     font-weight: normal !important;
     font-size: 19px !important;
@@ -79,6 +87,11 @@
    
 }
 
+
+.text-bg-pink{
+    background-color: #ab7e82;
+    color:white;
+}
 
 
 

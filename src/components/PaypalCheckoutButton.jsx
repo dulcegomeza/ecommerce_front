@@ -2,13 +2,13 @@ import { useEffect, useContext } from "react";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 /* Importando sweetalert */
 import Swal from 'sweetalert2';
-import ProductContext from "../../context/ProductContext";
+import ProductContext from "../context/ProductContext";
 // This values are the props in the UI
 const style = { layout: "vertical" };
 
 
 // Componente personalizado para envolver los botones de PayPal y manejar los cambios de moneda
-const PaypalButton = ({ currency, amount, showSpinner }) => {
+const PaypalCheckoutButton = ({ currency, amount, showSpinner }) => {
   // usePayPalScriptReducer solo se puede usar dentro de elementos secundarios de PayPalScriptProviders
   // This is the main reason to wrap the PayPalButtons in a new component
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
@@ -25,7 +25,7 @@ const PaypalButton = ({ currency, amount, showSpinner }) => {
 
 
 
-  const { cart, emptyCar } = useContext(ProductContext)
+  const { cart, emptyCart } = useContext(ProductContext)
 
   return (
     <>
@@ -50,15 +50,15 @@ const PaypalButton = ({ currency, amount, showSpinner }) => {
             .then((orderId) => {
               // Your code here after create the order
               console.log("Orden de compra: " + orderId);
-
               return orderId;
             });
         }}
         onApprove={function (data, actions) {
           return actions.order.capture().then(function () {
             console.log("Compra realizada");
-            emptyCar(cart);
-
+            Swal.fire('Compra realizada', '', 'success');
+            emptyCart();
+            console.log(data);
           });
         }}
       />
@@ -66,4 +66,4 @@ const PaypalButton = ({ currency, amount, showSpinner }) => {
   );
 };
 
-export default PaypalButton;
+export default PaypalCheckoutButton;
