@@ -1,6 +1,30 @@
-import { NavLink } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { getCategoriesService } from '../services/categoryService';
 
 function Home() {
+
+
+  const [categories, setCategories] = useState([]);
+
+
+  const getCategories = async () => {
+
+    try {
+      const resp = await getCategoriesService();
+      setCategories(resp.categories);
+    } catch (error) {
+
+    }
+
+  }
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+
 
   return (
     <>
@@ -34,34 +58,16 @@ function Home() {
 
       <div className="container mb-5">
         <div className="row">
-          <div className="col-lg-3 col-md-6">
-            <div className="profile-card-2"><img alt="Vestidos" src="https://static.wixstatic.com/media/cda177_b8e4143c21af45d8a59c2de1d80f14ca.png/v1/fill/w_500,h_500,al_c,q_90,usm_0.66_1.00_0.01/cda177_b8e4143c21af45d8a59c2de1d80f14ca.webp" className="img img-fluid" />
-              <div className="profile-name">Vestidos</div>
-             
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6">
-            <div className="profile-card-2"><img alt="Conjuntos" src="https://static.wixstatic.com/media/cda177_1c16f70e659f4d0d9f48b5d2f4f211f2.png/v1/fill/w_500,h_500,al_c,q_90,usm_0.66_1.00_0.01/cda177_1c16f70e659f4d0d9f48b5d2f4f211f2.webp" className="img img-fluid" />
-              <div className="profile-name">Accesorios</div>
-            
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6">
-            <div className="profile-card-2"><img alt="Bolsas" src="https://static.wixstatic.com/media/cda177_95cd2230351d454e8fd76b7545766138.png/v1/fill/w_500,h_500,al_c,q_90,usm_0.66_1.00_0.01/cda177_95cd2230351d454e8fd76b7545766138.webp" className="img img-fluid" />
-              <div className="profile-name">Abrigos</div>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6">
-            <div className="profile-card-2"><img alt="Bolsas" src="https://static.wixstatic.com/media/cda177_f95b14c95d6446de847782f0b6fd0027.png/v1/fill/w_500,h_500,al_c,q_90,usm_0.66_1.00_0.01/cda177_f95b14c95d6446de847782f0b6fd0027.webp" className="img img-fluid" />
-              <div className="profile-name">Conjuntos</div>
-            </div>
-          </div>
-     
+          {categories.map((category) => (
+              <Link to={`/products/${category._id}`}  key={category._id} className="col-lg-3 col-md-4">
+                <div  className="profile-card-2"><img alt={category.name} src={category.imgUrl} className="img img-fluid" />
+                  <div className="profile-name">{category.name}</div>
+
+                </div>
+              </Link>
+            ))}
         </div>
       </div>
-
-
-
     </>
   )
 }

@@ -100,3 +100,14 @@
 @media screen and (max-width: 990px){
     .product-grid{ margin-bottom: 30px; }
 }
+
+.btn-pink{
+    background-color: white;
+    text-align: left;
+}
+
+.btn-pink:hover{
+    background-color:  #ab7e82;
+    color: white;
+    text-align: left;
+}

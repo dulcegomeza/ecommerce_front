@@ -2,7 +2,7 @@
 import { useReducer, useCallback } from 'react';
 import ProductContext from './ProductContext';
 import ProductReducer from './ProductReducer';
-import { getProductsService, getProductByIdService } from '../services/productService';
+import { getProductsPaginadoService, getProductByIdService } from '../services/productService';
 import { types } from '../types/types';
 
 
@@ -20,9 +20,17 @@ function ProductProvider({ children }) {
   
 
   const getProducts = useCallback(
-    async () => {
+    async (category='', limite=9, desde=0) => {
+
+      const data = {
+        category:category,
+        limite:limite, 
+        desde:desde
+      }
+      
       try {
-        const resp = await getProductsService();
+      
+        const resp = await getProductsPaginadoService(data);
 
         console.log(resp);
         const products = resp.products.map((obj) => {

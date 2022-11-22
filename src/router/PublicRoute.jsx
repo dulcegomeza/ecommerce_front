@@ -15,7 +15,8 @@ export const PublicRoute = () => {
       <Routes>
         <Route path="home" element={<Home />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/:id" element={<Product />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="/products/:id" element={<Products />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
         <Route path="/" element={<Navigate to="/home" />} />
