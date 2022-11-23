@@ -22,8 +22,6 @@ function ProductProvider({ children }) {
 
   const getProducts = useCallback(
     async (category='', pag=1, limite=9 ) => {
-
-      console.log('estra', pag);
       const data = {
         category:category,
         limite:limite, 

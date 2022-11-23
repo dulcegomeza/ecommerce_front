@@ -56,7 +56,6 @@ function Products() {
   let items = [];
 
   const loadPage = (number) => {
-    console.log(number);
     getProducts(id, number, limite);
   }
 
