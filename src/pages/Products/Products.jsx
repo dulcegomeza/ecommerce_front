@@ -23,7 +23,6 @@ function Products() {
   const [categories, setCategories] = useState([]);
   const [idCategory, setIdCategory] = useState('');
   const [limite, setLimite] = useState(9);
-  const [pag, setPag] = useState(1);
 
 
   const getCategories = async () => {
@@ -45,14 +44,13 @@ function Products() {
   }, [verifyingToken]);
 
   useEffect(() => {
-    getProducts(idCategory, pag, limite);
-  }, [idCategory, limite, getProducts, pag]);
+    getProducts(idCategory, 1, limite);
+  }, [idCategory, limite, getProducts]);
 
 
   const cargar = async (id) => {
-    console.log(id);
     setIdCategory(id);
-    getProducts(id, pag, limite);
+    getProducts(id, 1, limite);
   }
 
   let items = [];
