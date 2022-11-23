@@ -9,6 +9,7 @@ import { types } from '../types/types';
 const initialState = {
   products: [],
   total:0,
+  total_pages:0,
   product: {
   },
   cart: [],
@@ -20,12 +21,13 @@ function ProductProvider({ children }) {
   
 
   const getProducts = useCallback(
-    async (category='', limite=9, desde=0) => {
+    async (category='', pag=1, limite=9 ) => {
 
+      console.log('estra', pag);
       const data = {
         category:category,
         limite:limite, 
-        desde:desde
+        pag: pag
       }
       
       try {
@@ -54,6 +56,12 @@ function ProductProvider({ children }) {
         dispatch({
           type: types.GET_PRODUCTS_TOTAL,
           payload: resp.total,
+        });
+
+        
+        dispatch({
+          type: types.GET_PRODUCTS_TOTAL_PAGES,
+          payload: resp.total_pages,
         });
       } catch (err) {
         console.log(err);
@@ -138,6 +146,7 @@ function ProductProvider({ children }) {
       value={{
         products: globalState.products,
         total: globalState.total,
+        total_pages: globalState.total_pages,
         getProducts,
         getProduct,
         product: globalState.product,

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ProductContext from '../../context/ProductContext';
 import './products-styles.css';
 import { UserContext } from "../../context/UserContext";
@@ -17,12 +17,13 @@ function Products() {
 
   const { user, verifyingToken } = useContext(UserContext);
 
-  const { products, total, getProducts, addProduct } = useContext(ProductContext);
+  const { products, total, total_pages, getProducts, addProduct } = useContext(ProductContext);
 
 
   const [categories, setCategories] = useState([]);
   const [idCategory, setIdCategory] = useState('');
   const [limite, setLimite] = useState(9);
+  const [pag, setPag] = useState(1);
 
 
   const getCategories = async () => {
@@ -44,21 +45,26 @@ function Products() {
   }, [verifyingToken]);
 
   useEffect(() => {
-    getProducts(idCategory, limite);
-  }, [idCategory, limite, getProducts]);
+    getProducts(idCategory, pag, limite);
+  }, [idCategory, limite, getProducts, pag]);
 
 
   const cargar = async (id) => {
     console.log(id);
     setIdCategory(id);
-    getProducts(id, limite);
+    getProducts(id, pag, limite);
   }
 
   let items = [];
 
-  for (let number = 1; number <= 5; number++) {
+  const loadPage = (number) => {
+    console.log(number);
+    getProducts(id, number, limite);
+  }
+
+  for (let number = 1; number <= total_pages; number++) {
     items.push(
-      <Pagination.Item key={number} >
+      <Pagination.Item onClick={() => loadPage(number)} key={number} >
         {number}
       </Pagination.Item>,
     );
@@ -120,7 +126,11 @@ function Products() {
             </div>
           </div>
 
-          <Pagination>{items}</Pagination>
+      
+
+              <Pagination className='justify-content-center'>{items}</Pagination>
+       
+
         </div>
 
 

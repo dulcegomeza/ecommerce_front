@@ -1,6 +1,6 @@
 import { types } from '../types/types';
 
- const ProductReducer = (state, action) => {
+const ProductReducer = (state, action) => {
     switch (action.type) {
         case types.GET_PRODUCTS:
             return {
@@ -8,10 +8,16 @@ import { types } from '../types/types';
                 products: action.payload,
             }
 
-            case types.GET_PRODUCTS_TOTAL:
+        case types.GET_PRODUCTS_TOTAL:
             return {
                 ...state,
-                total:action.payload
+                total: action.payload
+            }
+
+        case types.GET_PRODUCTS_TOTAL_PAGES:
+            return {
+                ...state,
+                total_pages: action.payload
             }
 
         case types.GET_PRODUCT:
@@ -28,13 +34,13 @@ import { types } from '../types/types';
         case types.DELETE_PRODUCT:
             return {
                 ...state,
-                cart: state.cart.filter( (product)=> product.uid !== action.payload)
-            //.filter crea un nuevo array
+                cart: state.cart.filter((product) => product.uid !== action.payload)
+                //.filter crea un nuevo array
             }
         case types.EMPTY_CAR:
             return {
                 ...state,
-                cart:[]
+                cart: []
             }
 
         default:
