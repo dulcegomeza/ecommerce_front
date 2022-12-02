@@ -30,8 +30,7 @@ function Account() {
     event.preventDefault();
 
     try {
-      const user = await signupService(formulario);
-      console.log(user);
+     await signupService(formulario);
       //antes se usaba el history.push('/ruta') antes de la version 6 de react-router-dom
       navigate("/login");
     } catch (err) {
@@ -48,7 +47,7 @@ function Account() {
 
   return (
 
-    <main className="form-signin w-100 m-auto">
+    <main className="form-signin w-100 m-auto animate__animated animate__fadeIn">
       <form onSubmit={createUser}>
         <h3 className="mt-6 mb-4 display-5 text-center">Registrarse</h3>
         <div className="form-floating mb-4">

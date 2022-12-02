@@ -1,10 +1,8 @@
-
-
 import AppRouter from './router/AppRouter';
 import { UserProvider } from './context/UserProvider';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import ProductProvider from './context/ProductProvider';
-
+import 'animate.css';
 
 
 

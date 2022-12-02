@@ -18,8 +18,6 @@ const initialState = {
 function ProductProvider({ children }) {
   const [globalState, dispatch] = useReducer(ProductReducer, initialState);
 
-  
-
   const getProducts = useCallback(
     async (category='', pag=1, limite=9 ) => {
       const data = {
@@ -32,7 +30,6 @@ function ProductProvider({ children }) {
       
         const resp = await getProductsPaginadoService(data);
 
-        console.log(resp);
         const products = resp.products.map((obj) => {
         
           return {
@@ -55,7 +52,6 @@ function ProductProvider({ children }) {
           type: types.GET_PRODUCTS_TOTAL,
           payload: resp.total,
         });
-
         
         dispatch({
           type: types.GET_PRODUCTS_TOTAL_PAGES,
@@ -72,7 +68,6 @@ function ProductProvider({ children }) {
   const getProduct = useCallback(async (uid) => {
     const res = await getProductByIdService(uid);
 
-    console.log(res);
     const product = {
       uid: res._id,
       name: res.name,
@@ -95,7 +90,6 @@ function ProductProvider({ children }) {
 
   const addProduct = async (uid) => {
 
-
     const res = await getProductByIdService(uid);
     
     const product = {
@@ -111,7 +105,6 @@ function ProductProvider({ children }) {
     const findProduct = globalState.cart.find((product) => {
       return product.uid === uid
     })
-    console.log(findProduct);
 
     if (!findProduct) {
       dispatch({

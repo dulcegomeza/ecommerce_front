@@ -9,7 +9,7 @@ const CartList = () => {
         <>
         {
                cart?.map( (product) =>(
-                <div  className="card rounded-3 mb-4" key={product.uid}>
+                <div className="card rounded-3 mb-4" key={product.uid}>
         
                   <div id="div_cart" className="card-body">
                     <div className="row d-flex justify-content-between align-items-center">

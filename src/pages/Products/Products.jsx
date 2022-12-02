@@ -14,11 +14,11 @@ import Pagination from 'react-bootstrap/Pagination';
 function Products() {
   const { id } = useParams();
 
+  let items = [];
 
   const { user, verifyingToken } = useContext(UserContext);
 
   const { products, total, total_pages, getProducts, addProduct } = useContext(ProductContext);
-
 
   const [categories, setCategories] = useState([]);
   const [idCategory, setIdCategory] = useState('');
@@ -38,7 +38,6 @@ function Products() {
     getCategories();
   }, []);
 
-
   useEffect(() => {
     verifyingToken();
   }, [verifyingToken]);
@@ -52,8 +51,6 @@ function Products() {
     setIdCategory(id);
     getProducts(id, 1, limite);
   }
-
-  let items = [];
 
   const loadPage = (number) => {
     getProducts(id, number, limite);
@@ -72,15 +69,12 @@ function Products() {
       <div className="container mt-5">
         <div className="row mb-2">
 
-
           <ButtonToolbar
             className="justify-content-end mb-4"
             aria-label="Toolbar with Button groups"
           >
 
             <h5 className='p-2'>{total} resultados</h5>
-
-
             <ButtonGroup aria-label="First group">
               <Button onClick={() => setLimite(9)} variant="secondary">9</Button>{' '}
               <Button onClick={() => setLimite(20)} variant="secondary">20</Button>{' '}
@@ -94,13 +88,13 @@ function Products() {
             {categories.map((category) =>
               <button key={category._id} onClick={() => cargar(category._id)} className='col-12 btn btn-pink'>{category.name}</button>
             )}
-
+            <button onClick={() => cargar('')} className='col-12 btn btn-pink'>Todos</button>
           </div>
           <div className='col-md-10'>
             <div className='row'>
               {
                 products.map((product) => (
-                  <div className="col-md-4 col-sm-6 mb-2" key={product.uid}>
+                  <div className="col-md-4 col-sm-6 mb-2 animate__animated animate__fadeIn" key={product.uid}>
                     <div className="product-grid">
                       <div className="product-image">
                         <NavLink to={`/product/${product.uid}`} className="image">
@@ -123,10 +117,10 @@ function Products() {
             </div>
           </div>
 
-      
 
-              <Pagination className='justify-content-center'>{items}</Pagination>
-       
+
+          <Pagination className='justify-content-center'>{items}</Pagination>
+
 
         </div>
 

@@ -1,6 +1,5 @@
 import { useEffect, useContext } from "react";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-/* Importando sweetalert */
 import Swal from 'sweetalert2';
 import ProductContext from "../context/ProductContext";
 // This values are the props in the UI

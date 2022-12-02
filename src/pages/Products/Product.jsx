@@ -45,7 +45,7 @@ function Product() {
   return (
     <>
 
-      <div className='container'>
+      <div className='container animate__animated animate__fadeIn'>
 
 
         <div className="card mb-3 mt-5">

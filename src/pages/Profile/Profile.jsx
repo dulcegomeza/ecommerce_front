@@ -78,7 +78,7 @@ function Profile() {
 
 
   return (
-    <main className="form-profile w-100 m-auto">
+    <main className="form-profile w-100 m-auto animate__animated animate__fadeIn">
       <form onSubmit={save}>
         <h3 className="mt-6 mb-4 display-5 text-center">Pérfil</h3>
         <div className="row">

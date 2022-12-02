@@ -13,8 +13,6 @@ function AppRouter() {
         verifyingToken();
     }, [verifyingToken]);
 
-
-    console.log(user);
     return (
         <Router>
             {
