@@ -22,7 +22,7 @@ function ProductProvider({ children }) {
     async (category='', pag=1, limite=9 ) => {
       const data = {
         category:category,
-        limite:limite, 
+        limit:limite, 
         pag: pag
       }
       

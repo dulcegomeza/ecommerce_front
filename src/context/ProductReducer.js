@@ -28,14 +28,13 @@ const ProductReducer = (state, action) => {
 
         case types.ADD_PRODUCT:
             return {
-                ...state,//hace una copia de como esta mi estado
+                ...state,
                 cart: [...state.cart, action.payload]
             }
         case types.DELETE_PRODUCT:
             return {
                 ...state,
                 cart: state.cart.filter((product) => product.uid !== action.payload)
-                //.filter crea un nuevo array
             }
         case types.EMPTY_CAR:
             return {
